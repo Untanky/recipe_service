@@ -7,8 +7,12 @@ import (
 
 type Recipe struct {
 	gorm.Model
-	ID    int
-	Title string
+	ID          int
+	Title       string
+	Description string
+	AuthorID    int
+	Ingredient  []string
+	Steps       []string
 }
 
 func NewRecipeFromEntity(entity *entities.Recipe) *Recipe {

@@ -7,4 +7,5 @@ import (
 
 func Migrate(db *gorm.DB) {
 	db.AutoMigrate(models.Recipe{})
+	db.AutoMigrate(models.Author{})
 }
