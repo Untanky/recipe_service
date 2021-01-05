@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/Untanky/recipe_service/database/models"
+	"github.com/Untanky/recipe_service/database/internal/models"
 	"github.com/Untanky/recipe_service/entities"
 	"gorm.io/gorm"
 )
