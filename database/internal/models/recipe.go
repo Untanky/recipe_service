@@ -7,9 +7,7 @@ import (
 
 type Recipe struct {
 	gorm.Model
-	ID          int
-	Title       string
-	Description string
+	RecipePreview
 	AuthorID    int
 	Ingredients []string
 	Steps       []string
