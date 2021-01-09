@@ -1,6 +1,7 @@
 package database
 
 import (
+	"github.com/Untanky/recipe_service/database/internal/models"
 	"github.com/Untanky/recipe_service/entities"
 	"gorm.io/gorm"
 )
@@ -10,47 +11,44 @@ type AuthorDatabase struct {
 }
 
 func (database *AuthorDatabase) GetByID(id int) (*entities.Author, error) {
-	// recipeModel := models.Recipe{}
+	authorModel := models.Author{}
 
-	// result := database.DB.First(&recipeModel, id)
-	// if result.Error != nil {
-	// 	return nil, result.Error
-	// }
+	result := database.DB.First(&authorModel, id)
+	if result.Error != nil {
+		return nil, result.Error
+	}
 
-	// recipe := recipeModel.ToEntity()
-	// return recipe, nil
-	return nil, nil
+	author := authorModel.ToEntity()
+	return author, nil
 }
 
-func (database *AuthorDatabase) Create(recipe *entities.Author) error {
-	// recipeModel := models.NewRecipeFromEntity(recipe)
+func (database *AuthorDatabase) Create(author *entities.Author) error {
+	authorModel := models.NewAuthorFromEntity(author)
 
-	// database.DB.Create(recipeModel)
-	// return database.DB.Error
-	return nil
+	database.DB.Create(authorModel)
+	return database.DB.Error
 }
 
-func (database *AuthorDatabase) Update(recipe *entities.Author) error {
-	// recipeModel := models.Recipe{}
+func (database *AuthorDatabase) Update(author *entities.Author) error {
+	authorModel := models.Author{}
 
-	// database.DB.First(&recipeModel, recipe.ID)
-	// if database.DB.Error != nil {
-	// 	return database.DB.Error
-	// }
+	database.DB.First(&authorModel, author.ID)
+	if database.DB.Error != nil {
+		return database.DB.Error
+	}
 
-	// recipeModel.UpdateFromEntity(recipe)
+	authorModel.UpdateFromEntity(author)
 
-	// database.DB.Save(recipeModel)
-	// return database.DB.Error
-	return nil
+	database.DB.Save(authorModel)
+	return database.DB.Error
 }
 
-func (database *AuthorDatabase) Delete(recipe *entities.Author) error {
-	return database.DeleteByID(recipe.ID)
+func (database *AuthorDatabase) Delete(author *entities.Author) error {
+	return database.DeleteByID(author.ID)
 }
 
 func (database *AuthorDatabase) DeleteByID(id int) error {
-	// database.DB.Delete(&models.Recipe{}, id)
-	// return database.DB.Error
+	database.DB.Delete(&models.Author{}, id)
+	return database.DB.Error
 	return nil
 }

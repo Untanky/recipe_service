@@ -5,6 +5,6 @@ type Recipe struct {
 	Title       string
 	Description string
 	Author      Author
-	Ingredient  []string
+	Ingredients []string
 	Steps       []string
 }
