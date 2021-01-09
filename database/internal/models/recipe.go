@@ -15,9 +15,11 @@ type Recipe struct {
 
 func NewRecipeFromEntity(entity *entities.Recipe) *Recipe {
 	return &Recipe{
-		ID:          entity.ID,
-		Title:       entity.Title,
-		Description: entity.Description,
+		RecipePreview: RecipePreview{
+			ID:          entity.ID,
+			Title:       entity.Title,
+			Description: entity.Description,
+		},
 		AuthorID:    entity.Author.ID,
 		Ingredients: entity.Ingredients,
 		Steps:       entity.Steps,
@@ -34,9 +36,9 @@ func (recipe *Recipe) UpdateFromEntity(entity *entities.Recipe) {
 
 func (recipe *Recipe) ToEntity() *entities.Recipe {
 	return &entities.Recipe{
-		ID:          recipe.ID,
-		Title:       recipe.Title,
-		Description: recipe.Description,
+		ID:          recipe.RecipePreview.ID,
+		Title:       recipe.RecipePreview.Title,
+		Description: recipe.RecipePreview.Description,
 		Ingredients: recipe.Ingredients,
 		Steps:       recipe.Steps,
 	}

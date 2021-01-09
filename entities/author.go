@@ -1,7 +1,5 @@
 package entities
 
-import "github.com/Untanky/recipe_service/entities/data_access"
-
 type Author struct {
 	ID             int
 	Firstname      string
@@ -12,6 +10,6 @@ type Author struct {
 	ProfileImageID string
 }
 
-func (author *Author) GetRecipes() (data_access.Segment, error) {
+func (author *Author) GetRecipes() ([]*Recipe, error) {
 	return nil, nil
 }

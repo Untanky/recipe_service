@@ -7,10 +7,10 @@ import (
 )
 
 type LatestSegment struct {
-	db gorm.DB
+	DB gorm.DB
 }
 
-func (segment *LatestSegment) GetRecipes() ([]*entities.Recipe, error) {
+func (segment *LatestSegment) GetRecipes() ([]*entities.RecipePreview, error) {
 	const order = "created_at desc"
 
 	offset := 0
@@ -18,13 +18,16 @@ func (segment *LatestSegment) GetRecipes() ([]*entities.Recipe, error) {
 
 	previewModels := []*models.RecipePreview{}
 
-	query := segment.db.Offset(offset).Limit(limit).Order(order)
-	result := query.Find(previewModels)
+	result := segment.DB.
+		Offset(offset).
+		Limit(limit).
+		Order(order).
+		Find(&previewModels)
 	if result.Error != nil {
 		return nil, result.Error
 	}
 
-	previews := []*entities.Recipe{}
+	previews := []*entities.RecipePreview{}
 	for _, previewModel := range previewModels {
 		entity := previewModel.ToEntity()
 		previews = append(previews, entity)
